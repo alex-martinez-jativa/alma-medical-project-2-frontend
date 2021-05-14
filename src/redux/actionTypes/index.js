@@ -1,0 +1,3 @@
+export const REQUEST_RAMPS = 'REQUEST_RAMPS';
+export const SUCCESST_RAMPS = 'SUCCESST_RAMPS';
+export const ERROR_RAMPS = 'ERROR_RAMPS';
