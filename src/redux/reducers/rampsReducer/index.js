@@ -1,4 +1,4 @@
-import {REQUEST_RAMPS, SUCCESST_RAMPS, ERROR_RAMPS} from '../../actionTypes';
+import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS} from '../../actionTypes';
 
 const initialState = {
     ramps: [],
@@ -13,7 +13,7 @@ const rampsReducer = (state = initialState, action) => {
                 ...state,
                 loading: true,
             }
-        case SUCCESST_RAMPS:
+        case SUCCESS_RAMPS:
             return {
                 ...state,
                 ramps: action.payload

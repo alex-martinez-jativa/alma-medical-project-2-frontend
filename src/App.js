@@ -1,13 +1,23 @@
-import {Provider} from 'react-redux';
-import store from './redux/store';
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import rampsAction from './redux/actions/rampsActions';
 
 function App() {
+
+  const {ramps, loading, error} = useSelector(state => state.ramps)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(rampsAction())
+  },[])
+
+
   return (
-    <Provider store={store}>
+
       <div className="App">
         
       </div>
-    </Provider>
+
   );
 }
 
