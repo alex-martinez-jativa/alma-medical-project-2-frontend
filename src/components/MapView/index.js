@@ -12,7 +12,7 @@ const MapView = () => {
   
     useEffect(() => {
       dispatch(rampsAction())
-    },[])
+    },[dispatch])
 
     return (
         <MapContainer center={{lat: INIT_LAT, lng: INIT_LNG}} zoom={6} style={{ height: '100vh', width: '100wh' }}>

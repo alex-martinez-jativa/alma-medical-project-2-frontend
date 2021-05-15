@@ -16,7 +16,8 @@ const rampsReducer = (state = initialState, action) => {
         case SUCCESS_RAMPS:
             return {
                 ...state,
-                ramps: action.payload
+                ramps: action.payload,
+                loading: false,
             }
         case ERROR_RAMPS:
             return {
