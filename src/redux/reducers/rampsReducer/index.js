@@ -22,7 +22,8 @@ const rampsReducer = (state = initialState, action) => {
         case ERROR_RAMPS:
             return {
                 ...state,
-                error: true
+                error: true,
+                loading: false
             }
         default:
             return state;
