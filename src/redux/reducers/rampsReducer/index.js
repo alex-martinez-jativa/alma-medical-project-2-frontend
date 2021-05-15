@@ -1,7 +1,8 @@
-import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL} from '../../actionTypes';
+import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL, GET_MATERIALS } from '../../actionTypes';
 
 const initialState = {
     ramps: [],
+    materials: [],
     loading: false,
     error: false
 }
@@ -25,6 +26,12 @@ const rampsReducer = (state = initialState, action) => {
                 ...state,
                 error: true,
                 loading: false
+            }
+        case GET_MATERIALS:
+            return {
+                ...state,
+                materials: action.payload,
+                loading: false,
             }
         default:
             return state;
