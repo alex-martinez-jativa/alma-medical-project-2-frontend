@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {rampsAction, rampsByMaterialAction, getMaterialsAction} from '../../redux/actions/rampsActions';
+import Material from '../Material';
 import './style.sass';
 
 const SideBar = () => {
@@ -32,13 +33,14 @@ const SideBar = () => {
             <ul>
                 {materials && materials.map((material) => {
                     return (
-                        <div className="materials">
-                            <li onClick={() => handleFilterByMaterial(material.name)} className="materials__name">{`${material.name}:`}</li>
-                            <li className="materials__count">{material.count}</li>
-                        </div> 
+                        <Material 
+                            name={material.name} 
+                            count={material.count} 
+                            onFilterByMaterial={handleFilterByMaterial}
+                        />
                     )
                 })}
-                <button type="button" onClick={handleGetAllRamps}>Reset</button>
+                <button className="sidebar__reset" type="button" onClick={handleGetAllRamps}>Reset</button>
             </ul>
         </aside>
     );
