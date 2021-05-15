@@ -1,12 +1,15 @@
 import MapView from './components/MapView';
+import SideBar from './components/SideBar';
+import './App.sass';
 
 function App() {
 
   return (
 
-      <div className="App">
+      <main className="App">
         <MapView />
-      </div>
+        <SideBar />
+      </main>
 
   );
 }
