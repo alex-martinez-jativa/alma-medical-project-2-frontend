@@ -21,7 +21,7 @@ const rampsError = () => {
     }
 }
 
-export const rampsByMaterial = (material) => {
+const rampsByMaterial = (material) => {
     return {
         type: FILTER_BY_MATERIAL,
         payload: material
@@ -32,8 +32,24 @@ const rampsAction = () => {
     return async (dispatch) => {
         try {
             dispatch(rampsRequest());
-            const response = await http.get(`${API_URL}/ramps`);
-            dispatch(rampsSuccess(response.features));
+            const {features} = await http.get(`${API_URL}/ramps`);
+            dispatch(rampsSuccess(features));
+
+        }catch(error) {
+            dispatch(rampsError())
+        }
+    }
+}
+
+export const rampsByMaterialAction = (material) => {
+    return async (dispatch) => {
+        try {
+            dispatch(rampsRequest());
+            const {features} = await http.get(`${API_URL}/ramps`);
+            const filterByMaterial = features.filter((items) => {
+                return items.properties.material === material;
+            })
+            dispatch(rampsByMaterial(filterByMaterial))
 
         }catch(error) {
             dispatch(rampsError())

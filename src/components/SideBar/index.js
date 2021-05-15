@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import rampsAction, {rampsByMaterial} from '../../redux/actions/rampsActions';
+import rampsAction, {rampsByMaterialAction} from '../../redux/actions/rampsActions';
 import './style.sass';
 
 const SideBar = () => {
@@ -10,7 +10,7 @@ const SideBar = () => {
 
     const retrieveSingleMaterialList = () => {
         let materialList = []
-        ramps.features.forEach((ramp) => {
+        ramps.forEach((ramp) => {
             if(!materialList.includes(ramp.properties.material)) {
                 materialList.push(ramp.properties.material)
             }
@@ -31,13 +31,13 @@ const SideBar = () => {
         }
     }
     const handleRetrieveAllMaterials = () => {
-        if(ramps.features) {
+        if(ramps) {
             const materialList = retrieveSingleMaterialList();
             const materialsObjectList = retrieveMaterialsObjectsList(materialList)
 
             for(let i = 0; i < materialsObjectList.length; i++) {
-                for(let j = 0; j < ramps.features.length; j++) {
-                    if(materialsObjectList[i].name === ramps.features[j].properties.material) {
+                for(let j = 0; j < ramps.length; j++) {
+                    if(materialsObjectList[i].name === ramps[j].properties.material) {
                         materialsObjectList[i].count += 1; 
                     }
                 }
@@ -47,7 +47,7 @@ const SideBar = () => {
     } 
 
     const handleFilterByMaterial = (materialValue) => {
-        dispatch(rampsByMaterial(materialValue));
+        dispatch(rampsByMaterialAction(materialValue));
     }
 
     useEffect(() => {

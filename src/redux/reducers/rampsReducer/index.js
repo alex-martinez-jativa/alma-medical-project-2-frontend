@@ -14,6 +14,7 @@ const rampsReducer = (state = initialState, action) => {
                 loading: true,
             }
         case SUCCESS_RAMPS:
+        case FILTER_BY_MATERIAL:
             return {
                 ...state,
                 ramps: action.payload,
@@ -24,14 +25,6 @@ const rampsReducer = (state = initialState, action) => {
                 ...state,
                 error: true,
                 loading: false
-            }
-        case FILTER_BY_MATERIAL:
-            const filterByMaterial = state.ramps.features.filter((items) => {
-                return items.properties.material === action.payload
-            })
-            return {
-                ...state,
-                ramps: filterByMaterial
             }
         default:
             return state;
