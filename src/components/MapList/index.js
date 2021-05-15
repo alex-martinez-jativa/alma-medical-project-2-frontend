@@ -2,7 +2,6 @@ import {Marker} from 'react-leaflet';
 import {IconLocation} from '../IconLocation';
 
 const MapList = ({ramps}) => {
-
     const coordinates = ramps.features.map((ramp) => {
         return ramp.geometry.coordinates[0].map((item, index) => {
             return item[index];

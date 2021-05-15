@@ -1,4 +1,4 @@
-import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS} from '../../actionTypes';
+import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL} from '../../actionTypes';
 
 const initialState = {
     ramps: [],
@@ -24,6 +24,14 @@ const rampsReducer = (state = initialState, action) => {
                 ...state,
                 error: true,
                 loading: false
+            }
+        case FILTER_BY_MATERIAL:
+            const filterByMaterial = state.ramps.features.filter((items) => {
+                return items.properties.material === action.payload
+            })
+            return {
+                ...state,
+                ramps: filterByMaterial
             }
         default:
             return state;
