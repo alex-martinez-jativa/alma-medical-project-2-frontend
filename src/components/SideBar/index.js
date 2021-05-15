@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import rampsAction, {rampsByMaterialAction, getMaterialsAction} from '../../redux/actions/rampsActions';
+import {rampsAction, rampsByMaterialAction, getMaterialsAction} from '../../redux/actions/rampsActions';
 import './style.sass';
 
 const SideBar = () => {

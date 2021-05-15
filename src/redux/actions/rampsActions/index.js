@@ -1,5 +1,6 @@
 import {SUCCESS_RAMPS, REQUEST_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL, GET_MATERIALS} from '../../actionTypes';
 import {http} from '../../../utils/http';
+import {logic} from '../../logic';
 const API_URL = 'http://localhost:3001';
 
 const rampsRequest = () => {
@@ -56,16 +57,10 @@ export const getMaterialsAction = () => {
         try {
             dispatch(rampsRequest());
             const {features} = await http.get(`${API_URL}/ramps`);
-            const singleMaterials = retrieveSingleMaterialList(features);
-            const materialsObjectList = retrieveMaterialsObjectsList(singleMaterials);
-            for(let i = 0; i < materialsObjectList.length; i++) {
-                for(let j = 0; j < features.length; j++) {
-                    if(materialsObjectList[i].name === features[j].properties.material) {
-                        materialsObjectList[i].count += 1; 
-                    }
-                }
-            }
-            dispatch(getMaterials(materialsObjectList))
+            const singleMaterials = logic.retrieveSingleElements(features);
+            const materialsObjectList = logic.setObjectInArray(singleMaterials);
+            const materialsCounter = logic.setCounterValue(materialsObjectList, features);
+            dispatch(getMaterials(materialsCounter))
 
         }catch(error) {
             dispatch(rampsError())
@@ -73,7 +68,7 @@ export const getMaterialsAction = () => {
     }
 }
 
-const rampsAction = () => {
+export const rampsAction = () => {
     return async (dispatch) => {
         try {
             dispatch(rampsRequest());
@@ -83,32 +78,5 @@ const rampsAction = () => {
         }catch(error) {
             dispatch(rampsError())
         }
-    }
-}
-
-export default rampsAction;
-
-
-const retrieveSingleMaterialList = (features) => {
-    let materialList = []
-    features.forEach((ramp) => {
-        if(!materialList.includes(ramp.properties.material)) {
-            materialList.push(ramp.properties.material)
-        }
-    })
-    return materialList  
-}
-
-const retrieveMaterialsObjectsList = (listEelement) => {
-    if(listEelement) {
-        let newMaterialList = [];          
-        listEelement.forEach((item) => {
-            const element = {
-                name: item,
-                count: 0
-            }
-            newMaterialList.push(element);
-        })
-        return newMaterialList;
     }
 }
