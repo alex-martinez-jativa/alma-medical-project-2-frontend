@@ -1,2 +1,2 @@
-export const INIT_LAT = -25.5018679;
-export const INIT_LNG = 142.7726118;
+export const INIT_LAT = -28.2293985;
+export const INIT_LNG = 153.5132623;
