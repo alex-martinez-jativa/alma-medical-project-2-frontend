@@ -1,7 +1,27 @@
-import {Marker} from 'react-leaflet';
+import {Marker, useMapEvents} from 'react-leaflet';
+import L from "leaflet";
 import {IconLocation} from '../IconLocation';
 
 const MapList = ({ramps}) => {
+
+    function getRampsInView() {
+        var rampsInView = [];
+        map.eachLayer( function(layer) {
+          if(layer instanceof L.Marker) {
+            if(map.getBounds().contains(layer.getLatLng())) {
+                rampsInView.push(layer.feature);
+            }
+          }
+        });
+        return rampsInView;
+      }
+
+    const map = useMapEvents({
+        zoom: () => {
+            getRampsInView()
+        }
+      });
+
     const coordinates = ramps.map((ramp) => {
         return ramp.geometry.coordinates[0].map((item, index) => {
             return item[index];
