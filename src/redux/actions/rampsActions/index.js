@@ -1,4 +1,4 @@
-import {SUCCESS_RAMPS, REQUEST_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL} from '../../actionTypes';
+import {SUCCESS_RAMPS, REQUEST_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL, COUNT_RAMPS} from '../../actionTypes';
 import {http} from '../../../utils/http';
 const API_URL = 'http://localhost:3001';
 
@@ -26,7 +26,14 @@ const rampsByMaterial = (material) => {
         type: FILTER_BY_MATERIAL,
         payload: material
     }
-} 
+}
+
+const countRamps = (count) => {
+    return {
+        type: COUNT_RAMPS,
+        payload: count
+    }
+}
 
 export const rampsByMaterialAction = (material) => {
     return async (dispatch) => {
@@ -54,5 +61,11 @@ export const getRampsAction = () => {
         }catch(error) {
             dispatch(rampsError())
         }
+    }
+}
+
+export const countRampsAction = (count) => {
+    return (dispatch) => {
+        dispatch(countRamps(count))
     }
 }

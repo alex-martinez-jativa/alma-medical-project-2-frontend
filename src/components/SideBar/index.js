@@ -8,6 +8,7 @@ import './style.sass';
 const SideBar = () => {
     const dispatch = useDispatch();
     const {materials, error} = useSelector(state => state.materials);
+    const {count} = useSelector(state => state.ramps);
 
     const handleFilterByMaterial = (materialValue) => {
         dispatch(rampsByMaterialAction(materialValue));
@@ -33,9 +34,11 @@ const SideBar = () => {
         <aside className="sidebar">
             <ul>
             <h2 className="sidebar__title">Australia's boat ramps</h2>
-                {materials && materials.map((material) => {
+                <p>{`${count} ramps in the viewport`}</p>
+                {materials && materials.map((material, index) => {
                     return (
                         <Material 
+                            key={index}
                             name={material.name} 
                             count={material.count} 
                             onFilterByMaterial={handleFilterByMaterial}

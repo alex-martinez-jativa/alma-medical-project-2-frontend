@@ -1,9 +1,10 @@
-import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL } from '../../actionTypes';
+import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL, COUNT_RAMPS } from '../../actionTypes';
 
 const initialState = {
     ramps: [],
     loading: false,
-    error: false
+    error: false,
+    count: 0
 }
 
 const rampsReducer = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const rampsReducer = (state = initialState, action) => {
                 ...state,
                 error: true,
                 loading: false
+            }
+        case COUNT_RAMPS:
+            return {
+                ...state,
+                count: action.payload
             }
         default:
             return state;

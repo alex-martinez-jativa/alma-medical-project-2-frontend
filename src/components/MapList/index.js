@@ -1,15 +1,16 @@
+import {useEffect} from 'react';
 import {Marker, useMapEvents} from 'react-leaflet';
 import L from "leaflet";
 import {IconLocation} from '../IconLocation';
+import {useDispatch} from 'react-redux';
+import {countRampsAction} from '../../redux/actions/rampsActions';
 
 const MapList = ({ramps}) => {
 
-    function getRampsInView() {
-        const rampsAux = ramps;
+    const dispatch = useDispatch();
+
+    const getRampsInView = () => {
         let latLngInView = [];
-        let rampsCoordsValues = [];
-        let totalLatLangValues = [];
-        let totalMarksInViewPort = [];
 
         map.eachLayer( function(layer) {
             if(layer instanceof L.Marker) {
@@ -20,30 +21,7 @@ const MapList = ({ramps}) => {
             }
         });
 
-        rampsAux.forEach((ramp) => {
-            const marks = ramp.geometry.coordinates[0][0]
-            rampsCoordsValues.push(marks);
-        })
-
-
-        for(let i = 0; i < rampsCoordsValues.length; i++) {
-            for(let j = 0; j < rampsCoordsValues[i].length; j++) {
-                totalLatLangValues.push(rampsCoordsValues[i][j])
-            }
-        }
-
-        for(let k = 0; k < totalLatLangValues.length; k++) {
-            for(let n = 0; n < latLngInView.length; n++) {
-                if(totalLatLangValues[k][0] === latLngInView[n].lng && totalLatLangValues[k][1] === latLngInView[n].lat) {
-                    const mark = {
-                        lat: totalLatLangValues[k][0],
-                        lng: totalLatLangValues[k][1]
-                    }
-                    totalMarksInViewPort.push(mark)
-                }
-            }
-        }
-        return totalMarksInViewPort;
+        dispatch(countRampsAction(latLngInView.length))
       }
 
     const map = useMapEvents({
@@ -51,6 +29,10 @@ const MapList = ({ramps}) => {
             getRampsInView()
         }
     });
+
+    useEffect(() => {
+        getRampsInView()
+    },[])
 
     const coordinates = ramps.map((ramp) => {
         return ramp.geometry.coordinates[0].map((item, index) => {
