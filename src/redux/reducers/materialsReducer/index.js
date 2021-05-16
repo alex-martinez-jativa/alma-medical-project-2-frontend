@@ -1,26 +1,25 @@
-import {REQUEST_RAMPS, SUCCESS_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL } from '../../actionTypes';
+import {REQUEST_MATERIALS, SUCCESS_MATERIALS, ERROR_MATERIALS } from '../../actionTypes';
 
 const initialState = {
-    ramps: [],
+    materials: [],
     loading: false,
     error: false
 }
 
 const rampsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case REQUEST_RAMPS:
+        case REQUEST_MATERIALS:
             return {
                 ...state,
                 loading: true,
             }
-        case SUCCESS_RAMPS:
-        case FILTER_BY_MATERIAL:
+        case SUCCESS_MATERIALS:
             return {
                 ...state,
-                ramps: action.payload,
+                materials: action.payload,
                 loading: false,
             }
-        case ERROR_RAMPS:
+        case ERROR_MATERIALS:
             return {
                 ...state,
                 error: true,

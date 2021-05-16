@@ -1,12 +1,13 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {rampsAction, rampsByMaterialAction, getMaterialsAction} from '../../redux/actions/rampsActions';
+import {getRampsAction, rampsByMaterialAction} from '../../redux/actions/rampsActions';
+import {getMaterialsAction} from '../../redux/actions/materialsActions';
 import Material from '../Material';
 import './style.sass';
 
 const SideBar = () => {
     const dispatch = useDispatch();
-    const {materials, error} = useSelector(state => state.ramps);
+    const {materials, error} = useSelector(state => state.materials);
 
     const handleFilterByMaterial = (materialValue) => {
         dispatch(rampsByMaterialAction(materialValue));
@@ -17,7 +18,7 @@ const SideBar = () => {
     }
 
     const handleGetAllRamps = () => {
-        dispatch(rampsAction())
+        dispatch(getRampsAction())
     }
 
     useEffect(() => {
@@ -31,6 +32,7 @@ const SideBar = () => {
     return (
         <aside className="sidebar">
             <ul>
+            <h2 className="sidebar__title">Australia's boat ramps</h2>
                 {materials && materials.map((material) => {
                     return (
                         <Material 

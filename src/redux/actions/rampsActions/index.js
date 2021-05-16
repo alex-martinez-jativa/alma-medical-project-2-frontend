@@ -1,6 +1,5 @@
-import {SUCCESS_RAMPS, REQUEST_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL, GET_MATERIALS} from '../../actionTypes';
+import {SUCCESS_RAMPS, REQUEST_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL} from '../../actionTypes';
 import {http} from '../../../utils/http';
-import {logic} from '../../logic';
 const API_URL = 'http://localhost:3001';
 
 const rampsRequest = () => {
@@ -29,13 +28,6 @@ const rampsByMaterial = (material) => {
     }
 } 
 
-const getMaterials = (materials) => {
-    return {
-        type: GET_MATERIALS,
-        payload: materials
-    }
-}
-
 export const rampsByMaterialAction = (material) => {
     return async (dispatch) => {
         try {
@@ -52,23 +44,7 @@ export const rampsByMaterialAction = (material) => {
     }
 }
 
-export const getMaterialsAction = () => {
-    return async (dispatch) => {
-        try {
-            dispatch(rampsRequest());
-            const {features} = await http.get(`${API_URL}/ramps`);
-            const singleMaterials = logic.retrieveSingleElements(features);
-            const materialsObjectList = logic.setObjectInArray(singleMaterials);
-            const materialsCounter = logic.setCounterValue(materialsObjectList, features);
-            dispatch(getMaterials(materialsCounter))
-
-        }catch(error) {
-            dispatch(rampsError())
-        }
-    }
-}
-
-export const rampsAction = () => {
+export const getRampsAction = () => {
     return async (dispatch) => {
         try {
             dispatch(rampsRequest());
