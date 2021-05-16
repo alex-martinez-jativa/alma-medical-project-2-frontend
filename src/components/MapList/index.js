@@ -9,7 +9,7 @@ const MapList = ({ramps}) => {
         map.eachLayer( function(layer) {
           if(layer instanceof L.Marker) {
             if(map.getBounds().contains(layer.getLatLng())) {
-                rampsInView.push(layer.feature);
+                rampsInView.push(layer.dragging._marker._latlng);
             }
           }
         });
