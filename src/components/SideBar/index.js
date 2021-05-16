@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getRampsAction, rampsByMaterialAction} from '../../redux/actions/rampsActions';
 import {getMaterialsAction} from '../../redux/actions/materialsActions';
 import Material from '../Material';
+import ErrorMessage from '../ErrorMessage';
 import './style.sass';
 
 const SideBar = () => {
@@ -47,6 +48,7 @@ const SideBar = () => {
                 })}
                 <button className="sidebar__reset" type="button" onClick={handleGetAllRamps}>All ramps</button>
             </ul>
+            {error && <ErrorMessage errorMessage="Something went wrong" />}
         </aside>
     );
 }
