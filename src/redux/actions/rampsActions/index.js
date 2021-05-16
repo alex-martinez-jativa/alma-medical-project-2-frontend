@@ -1,6 +1,6 @@
 import {SUCCESS_RAMPS, REQUEST_RAMPS, ERROR_RAMPS, FILTER_BY_MATERIAL, COUNT_RAMPS} from '../../actionTypes';
 import {http} from '../../../utils/http';
-const API_URL = 'http://localhost:3001';
+import {API_URL} from '../../../constants';
 
 const rampsRequest = () => {
     return {

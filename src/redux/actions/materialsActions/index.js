@@ -1,7 +1,7 @@
 import {SUCCESS_MATERIALS, REQUEST_MATERIALS, ERROR_MATERIALS} from '../../actionTypes';
 import {http} from '../../../utils/http';
 import {logic} from '../../logic';
-const API_URL = 'http://localhost:3001';
+import {API_URL} from '../../../constants';
 
 const materialsRequest = () => {
     return {
