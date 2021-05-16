@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useCallback} from 'react';
 import {Marker, useMapEvents} from 'react-leaflet';
 import L from "leaflet";
 import {IconLocation} from '../IconLocation';
@@ -9,7 +9,13 @@ const MapList = ({ramps}) => {
 
     const dispatch = useDispatch();
 
-    const getRampsInView = () => {
+    const map = useMapEvents({
+        zoom: () => {
+            getRampsInView()
+        }
+    });
+
+    const getRampsInView = useCallback(() => {
         let latLngInView = [];
 
         map.eachLayer( function(layer) {
@@ -22,17 +28,12 @@ const MapList = ({ramps}) => {
         });
 
         dispatch(countRampsAction(latLngInView.length))
-      }
+    },[dispatch, map])
 
-    const map = useMapEvents({
-        zoom: () => {
-            getRampsInView()
-        }
-    });
 
     useEffect(() => {
         getRampsInView()
-    },[])
+    },[getRampsInView])
 
     const coordinates = ramps.map((ramp) => {
         return ramp.geometry.coordinates[0].map((item, index) => {

@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getRampsAction, rampsByMaterialAction} from '../../redux/actions/rampsActions';
 import {getMaterialsAction} from '../../redux/actions/materialsActions';
@@ -15,21 +15,19 @@ const SideBar = () => {
         dispatch(rampsByMaterialAction(materialValue));
     }
 
-    const handleRetrieveAllMaterials = (materialValue) => {
-        dispatch(getMaterialsAction(materialValue))
-    }
 
-    const handleGetAllRamps = () => {
-        dispatch(getRampsAction())
-    }
+    const handleRetrieveAllMaterials = useCallback((materialValue) => dispatch(getMaterialsAction(materialValue)),[dispatch])
+
+    const handleGetAllRamps = useCallback(() => dispatch(getRampsAction()),[dispatch])
+
 
     useEffect(() => {
         handleRetrieveAllMaterials(); 
-    },[])
+    },[handleRetrieveAllMaterials])
 
     useEffect(() => {
         handleGetAllRamps()
-    },[])
+    },[handleGetAllRamps])
 
     return (
         <aside className="sidebar">
