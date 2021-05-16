@@ -1,3 +1,4 @@
+@import '../../style/_colors'
 .material
     display: flex
     margin: 1rem 0
@@ -5,3 +6,11 @@
         font-weight: bolder
         margin-right: 0.5rem
         cursor: pointer
+        color: $blue
+        &:hover
+            color: $darkblue
+@media screen and ( max-width: 600px )
+    .material
+        &__name
+            font-size: 0.8rem
+    

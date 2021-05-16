@@ -1,15 +1,31 @@
+@import '../../style/_colors'
 .sidebar
     width: 30rem
     height: 100vh
     &__title
         font-weight: 300
+        color: $blue
     &__reset
         background: transparent
-        border: 1px solid black
+        border: 1px solid $blue
         width: 10rem
         height: 2rem
         margin: 2rem 0
         cursor: pointer
+        color: $blue
         &:hover
-            border: 2px solid black
+            border: 2px solid $blue
             
+@media screen and ( max-width: 600px )
+    .sidebar 
+        width: 20rem
+        &__list
+            padding-left: 0.2rem
+        &__title
+            font-size: 1.2rem
+            text-align: center
+        &__count
+            font-size: 0.9rem
+        &__reset
+            width: 80%
+    

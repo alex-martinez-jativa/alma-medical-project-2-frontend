@@ -32,9 +32,9 @@ const SideBar = () => {
 
     return (
         <aside className="sidebar">
-            <ul>
+            <ul className="sidebar__list">
             <h2 className="sidebar__title">Australia's boat ramps</h2>
-                <p>{`${count} ramps in the viewport`}</p>
+                <p className="sidebar__count">{`${count} ramps in the viewport`}</p>
                 {materials && materials.map((material, index) => {
                     return (
                         <Material 
@@ -45,7 +45,7 @@ const SideBar = () => {
                         />
                     )
                 })}
-                <button className="sidebar__reset" type="button" onClick={handleGetAllRamps}>Reset</button>
+                <button className="sidebar__reset" type="button" onClick={handleGetAllRamps}>All ramps</button>
             </ul>
         </aside>
     );
