@@ -7,5 +7,6 @@
 <ol>
     <li>npm install: to install all npm packages</li>
     <li>npm start: to execute the project</li>
+    <li>npm run test: to run tests</li>
     <li>be sure that the API is running</li>
 </ol>
